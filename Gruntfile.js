@@ -17,8 +17,9 @@ module.exports = function (grunt) {
   //   $ grunt run:config.local.json
   grunt.registerTask('run', 'Runs JSBin for local development', function (config) {
     var done = this.async(),
+        debugOpt = grunt.option("debugger") || ' .', // e.g. --debug-brk lib/app.js
         filepath = path.join(__dirname, config || 'config.node.json'),
-        cmd = '[ -e "`which nodemon`" ] && nodemon --debug . || node --debug .',
+        cmd = '[ -e "`which nodemon`" ] && nodemon || node ' + debugOpt,
         child;
 
     // Set the config for the node app.
